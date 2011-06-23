@@ -53,3 +53,6 @@ mobiledata.interfaces=rmnet0
 # Maximum time (in msec) we allow the CallerInfo query to run,
 # before giving up and falling back to the default ringtone.
 ro.ringtone_query_wait_time=1500
+
+# Recording Audio Workaround
+persist.camera.shutter.disable=1
