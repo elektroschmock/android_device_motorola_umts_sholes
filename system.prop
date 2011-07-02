@@ -55,7 +55,7 @@ mobiledata.interfaces=rmnet0
 ro.ringtone_query_wait_time=1500
 
 
-# Recording Audio Workaround
+# Disable Audio Workaround
 persist.camera.shutter.disable=1
 
 # Logger properties
