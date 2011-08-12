@@ -97,3 +97,6 @@ BOARD_HAS_SMALL_RECOVERY := true
 #TARGET_RECOVERY_UPDATER_LIBS += librecovery_updater_generic
 
 USE_SHOLES_PROPERTY := true
+
+TARGET_SKIA_USE_MORE_MEMORY := false
+
