@@ -43,7 +43,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	ro.media.dec.jpeg.memcap=20000000 \
         ro.product.multi_touch_enabled=true \
         ro.product.max_num_touch=5 \
-        ro.com.google.gmsversion=2.2_r9 
+        ro.com.google.gmsversion=2.3_r4
 
 # Enable TI HotSpot
 #PRODUCT_PROPERTY_OVERRIDES += \
