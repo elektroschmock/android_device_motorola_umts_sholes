@@ -61,6 +61,6 @@
     <bool name="has_in_call_noise_suppression">true</bool>
 
     <!--CrystalTalk-->
-    <bool name="crystaltalk_enabled">true</bool>
+    <string name="voice_quality_param">motoVoiceQualityConfig</string>
 
 </resources>
