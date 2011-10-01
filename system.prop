@@ -1,5 +1,5 @@
 #
-# system.prop for generic sdk
+# system.prop for umts_sholes
 #
 
 rild.libpath=/system/lib/libril-moto-umts-1.so
@@ -21,8 +21,11 @@ wifi.supplicant_scan_interval = 60
 ro.opengles.version = 131072
 
 # This is a high density device with more memory, so larger vm heaps for it.
-dalvik.vm.startheapsize=8m #Allows the system to start at a lower heap size and rank up as needed.
 dalvik.vm.heapsize=32m
+
+#Start with a vm heap of 4m to avoid multiple GC runs at application startup
+#Default  vm startheapsize is 2m 
+dalvik.vm.startheapsize=4m
 
 #proximit sensor screen off delay
 mot.proximity.delay=450
