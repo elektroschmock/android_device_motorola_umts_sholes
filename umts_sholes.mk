@@ -165,7 +165,7 @@ PRODUCT_COPY_FILES += \
 
 $(call inherit-product-if-exists, vendor/motorola/umts_sholes/umts_sholes-vendor.mk)
 
-$(call inherit-product, build/target/product/small_base.mk)
+$(call inherit-product, build/target/product/full_base.mk)
 
 
 PRODUCT_NAME := umts_sholes
