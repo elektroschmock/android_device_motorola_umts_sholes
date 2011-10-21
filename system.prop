@@ -61,7 +61,7 @@ persist.sys.use_16bpp_alpha=1
 #
 # set this property to 0 if you rely on Latitude service
 # to automatically report your location (bye bye, free RAM)
-persist.sys.gmaps_hack=1
+# persist.sys.gmaps_hack=1
 
 windowsmgr.max_events_per_sec=60
 
