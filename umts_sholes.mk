@@ -40,7 +40,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	ro.telephony.call_ring.delay=3000 \
 	ro.url.safetylegal=http://www.motorola.com/staticfiles/Support/legal/?model=A853 \
 	ro.setupwizard.enable_bypass=1 \
-	ro.media.dec.jpeg.memcap=20000000 \
+        ro.media.dec.jpeg.memcap=20000000 \
         dalvik.vm.lockprof.threshold=500 \
         dalvik.vm.dexopt-flags=m=y \
         ro.product.multi_touch_enabled=true \
