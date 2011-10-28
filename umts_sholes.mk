@@ -117,12 +117,6 @@ PRODUCT_PACKAGES += \
 # we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
 
-# Screen density is actually considered a locale (since it is taken into account 
-# the the build-time selection of resources). The product definitions including 
-# this file must pay attention to the fact that the first entry in the final 
-# PRODUCT_LOCALES expansion must not be a density. 
-PRODUCT_LOCALES += hdpi
-
 PRODUCT_COPY_FILES += \
     device/motorola/umts_sholes/vold.fstab:system/etc/vold.fstab \
     device/motorola/umts_sholes/prebuilt/default.prop:system/default.prop \
@@ -174,6 +168,11 @@ $(call inherit-product-if-exists, vendor/motorola/umts_sholes/umts_sholes-vendor
 
 $(call inherit-product, build/target/product/full_base.mk)
 
+# Screen density is actually considered a locale (since it is taken into account 
+# the the build-time selection of resources). The product definitions including 
+# this file must pay attention to the fact that the first entry in the final 
+# PRODUCT_LOCALES expansion must not be a density.
+PRODUCT_LOCALES += hdpi
 
 PRODUCT_NAME := umts_sholes
 PRODUCT_DEVICE := umts_sholes
