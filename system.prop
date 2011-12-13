@@ -28,7 +28,7 @@ dalvik.vm.heapsize=24m
 dalvik.vm.startheapsize=4m
 
 # store dalvik-cache of everything in /cache
-dalvik.vm.dexopt-cache-only=1
+dalvik.vm.dexopt-cache-only=0
 
 #proximit sensor screen off delay
 mot.proximity.delay=450
