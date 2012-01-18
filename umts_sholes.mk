@@ -99,10 +99,13 @@ PRODUCT_PACKAGES += \
     libOMX.TI.Video.Decoder \
     libOMX.TI.Video.encoder \
     libVendor_ti_omx \
-    gps.sholes \
     sensors.sholes \
     lights.sholes \
     libaudiopolicy \
+    iwmulticall \
+    hostap \
+    hostapd.conf \
+    libhostapdcli \
     Usb \
     mot_boot_mode \
     charge_only_mode
@@ -121,7 +124,7 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 PRODUCT_COPY_FILES += \
     device/motorola/umts_sholes/vold.fstab:system/etc/vold.fstab \
     device/motorola/umts_sholes/prebuilt/default.prop:system/default.prop \
-    device/motorola/umts_sholes/prebuilt/etc/apns-conf.xml:system/etc/apns-conf.xml \
+    device/motorola/umts_sholes/prebuilt/etc/wifi/dnsmasq.conf:system/etc/wifi/dnsmasq.conf \
     device/motorola/umts_sholes/prebuilt/etc/init.d/10overclock:/system/etc/init.d/10overclock \
     device/motorola/umts_sholes/prebuilt/etc/init.d/07app2ext:/system/etc/init.d/07app2ext \
     device/motorola/umts_sholes/prebuilt/etc/init.d/08lib2ext:/system/etc/init.d/08lib2ext \
