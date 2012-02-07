@@ -21,24 +21,18 @@
         <item>12m</item>
         <item>16m</item>
         <item>24m</item>
+        <item>28m</item>
         <item>32m</item>
         <item>36m</item>
-        <item>40m</item>
-        <item>42m</item>
-        <item>44m</item>
-        <item>48m</item>
      </string-array>
 
     <string-array name="values_heapsize" translatable="false">
         <item>12m</item>
         <item>16m</item>
         <item>24m</item>
+        <item>28m</item>
         <item>32m</item>
         <item>36m</item>
-        <item>40m</item>
-        <item>42m</item>
-        <item>44m</item>
-        <item>48m</item>
     </string-array>
 
     <string-array name="entries_trackball_colors" translatable="false">
