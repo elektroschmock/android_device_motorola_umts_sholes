@@ -90,7 +90,7 @@ PRODUCT_PACKAGES += \
     libOMX.TI.Video.encoder \
     libVendor_ti_omx \
     sensors.sholes \
-    lights.sholes \
+    lights.omap3 \
     libaudiopolicy \
     iwmulticall \
     hostap \
@@ -98,7 +98,7 @@ PRODUCT_PACKAGES += \
     libhostapdcli \
     Usb \
     mot_boot_mode \
-    charge_only_mode_mm
+    charge_only_mode
 
 # we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
