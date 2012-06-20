@@ -2,92 +2,134 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory android:title="@string/audio_settings_title">
+
         <PreferenceScreen android:key="audio_effects" android:title="@string/audio_effects">
             <intent android:action="android.intent.action.MAIN"
-                android:targetPackage="com.motorola.android.AudioEffectSettings"
-                android:targetClass="com.motorola.android.AudioEffectSettings.DeviceListActivity" />
+                    android:targetPackage="com.motorola.android.AudioEffectSettings"
+                    android:targetClass="com.motorola.android.AudioEffectSettings.DeviceListActivity" />
         </PreferenceScreen>
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/compass_settings_title">
+
         <PreferenceScreen android:key="compass_calibrate" android:title="@string/compass_calibrate">
             <intent android:action="android.intent.action.MAIN"
-                android:targetPackage="com.motorola.CompassCalibrate"
-                android:targetClass="com.motorola.CompassCalibrate.CompassCalibrate" />
+                    android:targetPackage="com.motorola.CompassCalibrate"
+                    android:targetClass="com.motorola.CompassCalibrate.CompassCalibrate" />
         </PreferenceScreen>
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/baseband_title"
-        android:key="pref_category_baseband">
+                        android:key="pref_category_baseband">
+
         <ListPreference android:key="pref_baseband"
-            android:dialogTitle="@string/pref_baseband_title"
-            android:title="@string/pref_baseband_title"
-            android:summary="@string/pref_baseband_summary"
-            android:entries="@array/pref_baseband_entries"
-            android:entryValues="@array/pref_baseband_values" />
+                        android:dialogTitle="@string/pref_baseband_title"
+                        android:title="@string/pref_baseband_title"
+                        android:summary="@string/pref_baseband_summary"
+                        android:entries="@array/pref_baseband_entries"
+                        android:entryValues="@array/pref_baseband_values" />
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/keypad_title"
-        android:key="pref_category_keypad_settings">
+                        android:key="pref_category_keypad_settings">
+
         <ListPreference android:key="pref_keypad_type"
-            android:dialogTitle="@string/pref_keypad_type_title"
-            android:title="@string/pref_keypad_type_title"
-            android:summary="@string/pref_keypad_type_summary"
-            android:entries="@array/pref_keypad_type_entries"
-            android:entryValues="@array/pref_keypad_type_values" />
+                        android:dialogTitle="@string/pref_keypad_type_title"
+                        android:title="@string/pref_keypad_type_title"
+                        android:summary="@string/pref_keypad_type_summary"
+                        android:entries="@array/pref_keypad_type_entries"
+                        android:entryValues="@array/pref_keypad_type_values" />
+
         <ListPreference android:key="pref_keypad_type_sec"
-            android:dialogTitle="@string/pref_keypad_type_sec_title"
-            android:title="@string/pref_keypad_type_sec_title"
-            android:summary="@string/pref_keypad_type_sec_summary"
-            android:entries="@array/pref_keypad_type_sec_entries"
-            android:entryValues="@array/pref_keypad_type_sec_values" />
+                        android:dialogTitle="@string/pref_keypad_type_sec_title"
+                        android:title="@string/pref_keypad_type_sec_title"
+                        android:summary="@string/pref_keypad_type_sec_summary"
+                        android:entries="@array/pref_keypad_type_sec_entries"
+                        android:entryValues="@array/pref_keypad_type_sec_values" />
+
         <ListPreference android:key="pref_keypad_multipress"
-            android:dialogTitle="@string/pref_keypad_multipress_title"
-            android:title="@string/pref_keypad_multipress_title"
-            android:summary="@string/pref_keypad_multipress_summary"
-            android:entries="@array/pref_keypad_multipress_entries"
-            android:entryValues="@array/pref_keypad_multipress_values" />
+                        android:dialogTitle="@string/pref_keypad_multipress_title"
+                        android:title="@string/pref_keypad_multipress_title"
+                        android:summary="@string/pref_keypad_multipress_summary"
+                        android:entries="@array/pref_keypad_multipress_entries"
+                        android:entryValues="@array/pref_keypad_multipress_values" />
+
         <ListPreference android:key="pref_keypad_mplang"
-            android:dialogTitle="@string/pref_keypad_mplang_title"
-            android:title="@string/pref_keypad_mplang_title"
-            android:summary="@string/pref_keypad_mplang_summary"
-            android:entries="@array/pref_keypad_mplang_entries"
-            android:entryValues="@array/pref_keypad_mplang_values" />
+                        android:dialogTitle="@string/pref_keypad_mplang_title"
+                        android:title="@string/pref_keypad_mplang_title"
+                        android:summary="@string/pref_keypad_mplang_summary"
+                        android:entries="@array/pref_keypad_mplang_entries"
+                        android:entryValues="@array/pref_keypad_mplang_values" />
+
         <CheckBoxPreference android:key="pref_keypad_keylayout"
-            android:title="@string/pref_keypad_keylayout_title"
-            android:summary="@string/pref_keypad_keylayout_summary" />
+                            android:title="@string/pref_keypad_keylayout_title"
+                            android:summary="@string/pref_keypad_keylayout_summary" />
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/qtouch_title"
-        android:key="pref_category_qtouch_settings">
+                        android:key="pref_category_qtouch_settings">
+
         <ListPreference android:key="pref_qtouch_num"
-            android:dialogTitle="@string/pref_qtouch_num_title"
-            android:title="@string/pref_qtouch_num_title"
-            android:summary="@string/pref_qtouch_num_summary"
-            android:entries="@array/pref_qtouch_num_entries"
-            android:entryValues="@array/pref_qtouch_num_values" />
+                        android:dialogTitle="@string/pref_qtouch_num_title"
+                        android:title="@string/pref_qtouch_num_title"
+                        android:summary="@string/pref_qtouch_num_summary"
+                        android:entries="@array/pref_qtouch_num_entries"
+                        android:entryValues="@array/pref_qtouch_num_values" />
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/battery_title"
-        android:key="pref_category_battery_settings">
+                        android:key="pref_category_battery_settings">
+
         <CheckBoxPreference android:key="pref_status_bar_oneperc_battery"
-            android:title="@string/ui_status_bar_oneperc_battery_title"
-            android:summary="@string/ui_status_bar_oneperc_battery_summary"
-            android:defaultValue="true" />
+                            android:title="@string/ui_status_bar_oneperc_battery_title"
+                            android:summary="@string/ui_status_bar_oneperc_battery_summary"
+                            android:defaultValue="true" />
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/dock_title"
-        android:key="pref_category_dock_settings">
+                        android:key="pref_category_dock_settings">
+
         <CheckBoxPreference android:key="pref_dock_observer_off"
-            android:title="@string/pref_dock_observer_off_title"
-            android:summary="@string/pref_dock_observer_off_summary" />
+                            android:title="@string/pref_dock_observer_off_title"
+                            android:summary="@string/pref_dock_observer_off_summary" />
     </PreferenceCategory>
 
+    <!-- aplogd pref -->
     <PreferenceCategory android:title="@string/debug_title">
-        <!-- aplogd pref -->
+
         <CheckBoxPreference android:key="pref_logger"
-            android:title="@string/pref_logger_title"
-            android:summary="@string/pref_logger_summary" />
+                            android:title="@string/pref_logger_title"
+                            android:summary="@string/pref_logger_summary" />
     </PreferenceCategory>
 
+    <!-- long term orbit download pref -->
+    <PreferenceCategory android:key="lto_download"
+                        android:title="@string/lto_download_title">
+
+        <CheckBoxPreference android:key="lto_download_enabled"
+                            android:title="@string/lto_download_enabled_title"
+                            android:summary="@string/lto_download_enabled_summary" />
+
+        <ListPreference android:key="lto_download_interval"
+                        android:dependency="lto_download_enabled"
+                        android:title="@string/lto_download_interval_title"
+                        android:entries="@array/lto_download_interval_entries"
+                        android:entryValues="@array/lto_download_interval_values"
+                        android:defaultValue="259200" />
+
+        <CheckBoxPreference android:key="lto_download_wifi_only"
+                            android:dependency="lto_download_enabled"
+                            android:title="@string/lto_download_wifi_only_title"
+                            android:summary="@string/lto_download_wifi_only_summary"
+                            android:defaultValue="true" />
+
+        <ListPreference android:key="lto_download_file"
+                        android:title="@string/lto_download_file_title"
+                        android:entries="@array/lto_download_file_entries"
+                        android:entryValues="@array/lto_download_file_values"
+                        android:defaultValue="7day" />
+
+        <Preference android:key="lto_download_now"
+                    android:title="@string/lto_download_now" />
+    </PreferenceCategory>
 </PreferenceScreen>

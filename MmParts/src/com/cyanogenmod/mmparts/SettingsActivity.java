@@ -2,7 +2,13 @@ package com.cyanogenmod.mmparts;
 
 import java.util.ArrayList;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
+import android.content.res.Resources;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,11 +20,16 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceCategory;
+import android.preference.PreferenceManager;
+import android.preference.PreferenceScreen;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 
+import java.text.DateFormat;
+import java.util.Date;
+
 public class SettingsActivity extends PreferenceActivity implements
-        OnPreferenceChangeListener {
+        OnPreferenceChangeListener, OnSharedPreferenceChangeListener {
 
     private static final String DOCK_OBSERVER_OFF_PREF = "pref_dock_observer_off";
 
@@ -116,6 +127,32 @@ public class SettingsActivity extends PreferenceActivity implements
 
     private CheckBoxPreference mStatusBarOnepercBattery;
 
+    private CheckBoxPreference mLtoDownloadEnabledPref;
+
+    private ListPreference mLtoDownloadIntervalPref;
+
+    private ListPreference mLtoDownloadFilePref;
+
+    private CheckBoxPreference mLtoDownloadWifiOnlyPref;
+
+    private Preference mLtoDownloadNowPref;
+
+    private BroadcastReceiver mLtoStateReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            int state = intent.getIntExtra(LtoDownloadService.EXTRA_STATE, LtoDownloadService.STATE_IDLE);
+
+            mLtoDownloadNowPref.setEnabled(state == LtoDownloadService.STATE_IDLE);
+            if (state == LtoDownloadService.STATE_IDLE) {
+                boolean success = intent.getBooleanExtra(LtoDownloadService.EXTRA_SUCCESS, true);
+                updateLtoDownloadDateSummary(success);
+            } else {
+                int progress = intent.getIntExtra(LtoDownloadService.EXTRA_PROGRESS, 0);
+                updateLtoDownloadProgressSummary(progress);
+            }
+        }
+    };
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -182,6 +219,17 @@ public class SettingsActivity extends PreferenceActivity implements
                 .findPreference(PREF_STATUS_BAR_ONEPERC_BATTERY);
         String onepercBattery = SystemProperties.get(ONEPERC_BATT_PERSIST_PROP, ONEPERC_BATT_DEFAULT);
         mStatusBarOnepercBattery.setChecked("1".equals(onepercBattery));
+
+        PreferenceCategory ltoSettings = (PreferenceCategory) prefSet.findPreference("lto_download");
+        mLtoDownloadEnabledPref = (CheckBoxPreference) ltoSettings.findPreference("lto_download_enabled");
+        mLtoDownloadEnabledPref.setOnPreferenceChangeListener(this);
+        mLtoDownloadIntervalPref = (ListPreference) ltoSettings.findPreference("lto_download_interval");
+        mLtoDownloadIntervalPref.setOnPreferenceChangeListener(this);
+        mLtoDownloadFilePref = (ListPreference) ltoSettings.findPreference("lto_download_file");
+        mLtoDownloadFilePref.setOnPreferenceChangeListener(this);
+        mLtoDownloadWifiOnlyPref = (CheckBoxPreference) ltoSettings.findPreference("lto_download_wifi_only");
+        mLtoDownloadWifiOnlyPref.setOnPreferenceChangeListener(this);
+        mLtoDownloadNowPref = ltoSettings.findPreference("lto_download_now");
     }
 
     @Override
@@ -192,6 +240,18 @@ public class SettingsActivity extends PreferenceActivity implements
         mKeypadTypeSecPref.setSummary(String.format(mKeypadTypeSecSum, mKeypadTypeSecPref.getEntry()));
         mKeypadMultipressPref.setSummary(String.format(mKeypadMultipressSum, mKeypadMultipressPref.getEntry()));
         mKeypadMplangPref.setSummary(String.format(mKeypadMplangSum, mKeypadMplangPref.getEntry()));
+        updateLtoDownloadDateSummary(true);
+        updateLtoIntervalSummary();
+
+        getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
+        registerReceiver(mLtoStateReceiver, new IntentFilter(LtoDownloadService.ACTION_STATE_CHANGE));
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        unregisterReceiver(mLtoStateReceiver);
+        getPreferenceScreen().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
     }
 
     @Override
@@ -212,6 +272,9 @@ public class SettingsActivity extends PreferenceActivity implements
         } else if (preference == mStatusBarOnepercBattery) {
             SystemProperties.set(ONEPERC_BATT_PERSIST_PROP,
                     mStatusBarOnepercBattery.isChecked() ? "1" : "0");
+            return true;
+        } else if (preference == mLtoDownloadNowPref) {
+            invokeLtoDownloadService(true);
             return true;
         }
         return false;
@@ -278,8 +341,57 @@ public class SettingsActivity extends PreferenceActivity implements
             String qtouchNum = (String) newValue;
             SystemProperties.set(QTOUCH_NUM_PERSIST_PROP, qtouchNum);
             return true;
+        } else if (preference == mLtoDownloadEnabledPref
+                || preference == mLtoDownloadIntervalPref
+                || preference == mLtoDownloadFilePref
+                || preference == mLtoDownloadWifiOnlyPref) {
+            invokeLtoDownloadService(false);
+            return true;
         }
         return false;
     }
 
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences prefSet, String key) {
+        if (key.equals(mLtoDownloadIntervalPref.getKey())) {
+            updateLtoIntervalSummary();
+        }
+    }
+
+    private void updateLtoIntervalSummary() {
+        CharSequence value = mLtoDownloadIntervalPref.getEntry();
+        mLtoDownloadIntervalPref.setSummary(
+                getResources().getString(R.string.lto_download_interval_summary, value));
+    }
+
+    private void updateLtoDownloadProgressSummary(int progress) {
+        mLtoDownloadNowPref.setSummary(
+                getResources().getString(R.string.lto_downloading_data, progress));
+    }
+
+    private void updateLtoDownloadDateSummary(boolean success) {
+        Resources res = getResources();
+        SharedPreferences prefSet = PreferenceManager.getDefaultSharedPreferences(this);
+        long lastDownload = prefSet.getLong(LtoDownloadService.KEY_LAST_DOWNLOAD, 0);
+        final String lastDownloadString;
+        int resId = R.string.lto_last_download_date;
+
+        if (lastDownload != 0) {
+            Date date = new Date(lastDownload);
+            lastDownloadString = DateFormat.getDateTimeInstance().format(date);
+            if (!success) {
+                resId = R.string.lto_last_download_date_failure;
+            }
+        } else {
+            lastDownloadString = res.getString(R.string.never);
+        }
+
+        mLtoDownloadNowPref.setSummary(res.getString(resId, lastDownloadString));
+    }
+
+    private void invokeLtoDownloadService(boolean forceDownload) {
+        Intent intent = new Intent(this, LtoDownloadService.class);
+        intent.putExtra(LtoDownloadService.EXTRA_FORCE_DOWNLOAD, forceDownload);
+        startService(intent);
+    }
 }
